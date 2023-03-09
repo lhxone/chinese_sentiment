@@ -1,8 +1,8 @@
 import os
 import codecs
 
-POS = os.path.join(os.getcwd(), 'pos')
-NEG = os.path.join(os.getcwd(), 'neg')
+POS = os.path.join(os.getcwd(), 'corpus', 'pos')
+NEG = os.path.join(os.getcwd(), 'corpus', 'neg')
 FIX_POS = os.path.join(os.getcwd(), 'fix_pos')
 FIX_NEG = os.path.join(os.getcwd(), 'fix_neg')
 
@@ -12,12 +12,12 @@ def fix_corpus(dir_s, dir_t):
         with open(os.path.join(dir_s, item), 'r') as f:
             try:
                 s = f.read()
-                fix_s = s.decode('gb2312')
+                fix_s = s
             except UnicodeDecodeError:
                 try:
-                    fix_s = s.decode('gbk')
+                    fix_s = s
                 except UnicodeDecodeError:
-                    fix_s = s.decode('gb2312', errors='ignore')
+                    fix_s = s
             with codecs.open(os.path.join(dir_t, item), 'w', encoding='utf8') as ff:
                 ff.write(fix_s)
 
